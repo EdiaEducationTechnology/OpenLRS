@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.Validator;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +35,6 @@ import org.apereo.openlrs.utils.StatementUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -127,8 +127,7 @@ public class StatementController {
      * @throws JsonProcessingException 
      */
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json;charset=utf-8")
-    public List<String> postStatement(@RequestBody String json) throws InvalidXAPIRequestException {
-    	
+    public List<String> postStatement(@Valid @RequestBody String json) throws InvalidXAPIRequestException {
     	List<String> ids = null;
     	try {
 			if (json != null && StringUtils.isNotBlank(json)) {
