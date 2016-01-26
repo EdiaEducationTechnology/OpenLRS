@@ -27,8 +27,8 @@
   </target>
   <target name="package" depends="config">
     <echo message="Current branch: ${git.branch}"/>
-    <copy tofile="${deploy.target}/webapps/ROOT.war">
- 	<fileset dir="target/" includes="*.war"/>
+    <copy tofile="${deploy.target}/webapps/openlrs.war">
+ 		<fileset dir="target/" includes="*.war"/>
     </copy>
     <zip destfile="${package.dir}/${package.name}-${project.branch}-build${build.number}.zip" basedir="${deploy.target}"/>
     <!-- <zip destfile="${package.dir}/${package.name}-${project.branch}-latest.zip" basedir="${deploy.target}"/> -->
