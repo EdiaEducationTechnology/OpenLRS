@@ -47,7 +47,7 @@ public class RedisPubSubTierTwoMessageReceiver {
 		OpenLRSEntity entity = null;
 		
 		try {
-			entity = objectMapper.readValue(json.getBytes(), Statement.class);
+			entity = objectMapper.readValue(json.getBytes("UTF-8"), Statement.class);
 		}
 		catch (Exception e) {
 			log.warn("unable to parse {} as xapi",json);
@@ -56,7 +56,7 @@ public class RedisPubSubTierTwoMessageReceiver {
 		if (entity == null) {
 			// try caliper
 			try {
-				entity = objectMapper.readValue(json.getBytes(), CaliperEvent.class);
+				entity = objectMapper.readValue(json.getBytes("UTF-8"), CaliperEvent.class);
 			}
 			catch (Exception e) {
 				throw new InvalidEventFormatException(String.format("unable to parse %s",json),e);

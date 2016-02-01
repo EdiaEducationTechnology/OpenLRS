@@ -17,6 +17,7 @@ package org.apereo.openlrs.storage.inmemory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +52,9 @@ public class InMemoryStorage implements TierOneStorage<OpenLRSEntity>, TierTwoSt
 			for (OpenLRSEntity entity : entities) {
 				save(entity);
 			}
+			return new ArrayList<OpenLRSEntity>(entities);
 		}
-		return new ArrayList<OpenLRSEntity>(entities);
+		return Collections.emptyList();
 	}
 
 	@Override

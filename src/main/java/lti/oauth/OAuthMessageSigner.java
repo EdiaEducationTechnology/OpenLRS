@@ -51,7 +51,7 @@ public class OAuthMessageSigner {
 	 */
 	public String sign(String secret, String algorithm, String method, 
 				String url, SortedMap<String, String> parameters) throws Exception {
-		SecretKeySpec secretKeySpec = new SecretKeySpec((secret.concat(OAuthUtil.AMPERSAND)).getBytes(),algorithm);
+		SecretKeySpec secretKeySpec = new SecretKeySpec((secret.concat(OAuthUtil.AMPERSAND)).getBytes("UTF-8"),algorithm);
         Mac mac = Mac.getInstance(secretKeySpec.getAlgorithm());
         mac.init(secretKeySpec);
         
@@ -77,10 +77,10 @@ public class OAuthMessageSigner {
 			log.debug(signatureBase.toString());
 		}
 		
-		byte[] bytes = mac.doFinal(signatureBase.toString().getBytes());
+		byte[] bytes = mac.doFinal(signatureBase.toString().getBytes("UTF-8"));
 		byte[] encodedMacBytes = Base64.encodeBase64(bytes);
         
-		return new String(encodedMacBytes);
+		return new String(encodedMacBytes, "UTF-8");
 	}	
 	
 	/**
@@ -103,14 +103,14 @@ public class OAuthMessageSigner {
 				String url, SortedMap<String, String> parameters,
 				String requestBody) throws Exception {
         
-        byte[] bytes = requestBody.getBytes();
+        byte[] bytes = requestBody.getBytes("UTF-8");
         
         MessageDigest sha = MessageDigest.getInstance("SHA-1");
         sha.reset();
         sha.update(bytes);
 		byte[] encodedRequestBytes = Base64.encodeBase64(sha.digest());
 		
-		String oauthBodyHash = new String(encodedRequestBytes);
+		String oauthBodyHash = new String(encodedRequestBytes, "UTF-8");
 		
 		parameters.put(OAuthUtil.OAUTH_POST_BODY_PARAMETER, oauthBodyHash);
 		

@@ -514,53 +514,53 @@ public class LaunchRequest extends LtiMessage {
     }
 
     private void init(Map<String, String> paramMap) {
-        this.lti_message_type = paramMap.get("lti_message_type");
-        this.lti_version = paramMap.get("lti_version");
-        this.resource_link_id = paramMap.get("resource_link_id");
-        this.resource_link_title = paramMap.get("resource_link_title");
-        this.resource_link_description = paramMap.get("resource_link_description");
-        this.user_id = paramMap.get("user_id");
-        this.user_image = paramMap.get("user_image");
-        this.roles = paramMap.get("roles");
-        this.role_scope_mentor = paramMap.get("role_scope_mentor");
-        this.lis_person_name_given = paramMap.get("lis_person_name_given");
-        this.lis_person_name_family = paramMap.get("lis_person_name_family");
-        this.lis_person_name_full = paramMap.get("lis_person_name_full");
-        this.lis_person_contact_email_primary = paramMap.get("lis_person_contact_email_primary");
-        this.lis_outcome_service_url = paramMap.get("lis_outcome_service_url");
-        this.lis_result_sourcedid = paramMap.get("lis_result_sourcedid");
-        this.context_id = paramMap.get("context_id");
-        this.context_type = paramMap.get("context_type");
-        this.context_title = paramMap.get("context_title");
-        this.context_label = paramMap.get("context_label");
-        this.launch_presentation_locale = paramMap.get("launch_presentation_locale");
-        this.launch_presentation_document_target = paramMap.get("launch_presentation_document_target");
-        this.launch_presentation_css_url = paramMap.get("launch_presentation_css_url");
-        this.launch_presentation_width = paramMap.get("launch_presentation_width");
-        this.launch_presentation_width = paramMap.get("launch_presentation_width");
-        this.launch_presentation_return_url = paramMap.get("launch_presentation_return_url");
-        this.tool_consumer_info_product_family_code = paramMap.get("tool_consumer_info_product_family_code");
-        this.tool_consumer_info_version = paramMap.get("tool_consumer_info_version");
-        this.tool_consumer_instance_guid = paramMap.get("tool_consumer_instance_guid");
-        this.tool_consumer_instance_name = paramMap.get("tool_consumer_instance_name");
-        this.tool_consumer_instance_description = paramMap.get("tool_consumer_instance_description");
-        this.tool_consumer_instance_url = paramMap.get("tool_consumer_instance_url");
-        this.tool_consumer_instance_contact_email = paramMap.get("tool_consumer_instance_contact_email");
-        this.oauth_consumer_key = paramMap.get("oauth_consumer_key");
-        this.oauth_timestamp = paramMap.get("oauth_timestamp");
-        this.oauth_nonce = paramMap.get("oauth_nonce");
-        this.oauth_signature = paramMap.get("oauth_signature");
-        this.oauth_signature_method = paramMap.get("oauth_signature_method");
-        this.oauth_version = paramMap.get("oauth_version");
-        this.oauth_callback = paramMap.get("oauth_callback");
-
-
-        //I'm not excited about this solution, but the only way to find unknown params
-        //is to check to see if they already exist. Get the sorted map at this point
-        //and check
-        SortedMap<String,String> currentSM = this.toSortedMap();
-
         if (paramMap != null && !paramMap.isEmpty()) {
+            this.lti_message_type = paramMap.get("lti_message_type");
+            this.lti_version = paramMap.get("lti_version");
+            this.resource_link_id = paramMap.get("resource_link_id");
+            this.resource_link_title = paramMap.get("resource_link_title");
+            this.resource_link_description = paramMap.get("resource_link_description");
+            this.user_id = paramMap.get("user_id");
+            this.user_image = paramMap.get("user_image");
+            this.roles = paramMap.get("roles");
+            this.role_scope_mentor = paramMap.get("role_scope_mentor");
+            this.lis_person_name_given = paramMap.get("lis_person_name_given");
+            this.lis_person_name_family = paramMap.get("lis_person_name_family");
+            this.lis_person_name_full = paramMap.get("lis_person_name_full");
+            this.lis_person_contact_email_primary = paramMap.get("lis_person_contact_email_primary");
+            this.lis_outcome_service_url = paramMap.get("lis_outcome_service_url");
+            this.lis_result_sourcedid = paramMap.get("lis_result_sourcedid");
+            this.context_id = paramMap.get("context_id");
+            this.context_type = paramMap.get("context_type");
+            this.context_title = paramMap.get("context_title");
+            this.context_label = paramMap.get("context_label");
+            this.launch_presentation_locale = paramMap.get("launch_presentation_locale");
+            this.launch_presentation_document_target = paramMap.get("launch_presentation_document_target");
+            this.launch_presentation_css_url = paramMap.get("launch_presentation_css_url");
+            this.launch_presentation_width = paramMap.get("launch_presentation_width");
+            this.launch_presentation_width = paramMap.get("launch_presentation_width");
+            this.launch_presentation_return_url = paramMap.get("launch_presentation_return_url");
+            this.tool_consumer_info_product_family_code = paramMap.get("tool_consumer_info_product_family_code");
+            this.tool_consumer_info_version = paramMap.get("tool_consumer_info_version");
+            this.tool_consumer_instance_guid = paramMap.get("tool_consumer_instance_guid");
+            this.tool_consumer_instance_name = paramMap.get("tool_consumer_instance_name");
+            this.tool_consumer_instance_description = paramMap.get("tool_consumer_instance_description");
+            this.tool_consumer_instance_url = paramMap.get("tool_consumer_instance_url");
+            this.tool_consumer_instance_contact_email = paramMap.get("tool_consumer_instance_contact_email");
+            this.oauth_consumer_key = paramMap.get("oauth_consumer_key");
+            this.oauth_timestamp = paramMap.get("oauth_timestamp");
+            this.oauth_nonce = paramMap.get("oauth_nonce");
+            this.oauth_signature = paramMap.get("oauth_signature");
+            this.oauth_signature_method = paramMap.get("oauth_signature_method");
+            this.oauth_version = paramMap.get("oauth_version");
+            this.oauth_callback = paramMap.get("oauth_callback");
+    
+    
+            //I'm not excited about this solution, but the only way to find unknown params
+            //is to check to see if they already exist. Get the sorted map at this point
+            //and check
+            SortedMap<String,String> currentSM = this.toSortedMap();
+
             Set<String> keys = paramMap.keySet();
             if (keys != null && !keys.isEmpty()) {
                 for (String key : keys) {

@@ -81,10 +81,10 @@ public class StatementControllerIntegrationTest {
 	@Test
 	public void thatStatementGetWithNoVersionHeaderReturns400() throws Exception {
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 			get("/xAPI/statements")
-				.header("Authorization", "Basic " + new String(encodedBytes))
+				.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isBadRequest());
@@ -116,10 +116,10 @@ public class StatementControllerIntegrationTest {
 	@Test
 	public void thatStatementGetWithBasicReturns200() throws Exception {
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 				get("/xAPI/statements")
-					.header("Authorization", "Basic " + new String(encodedBytes))
+					.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 					.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 					.accept(MediaType.APPLICATION_JSON))
 					.andDo(print())
@@ -129,10 +129,10 @@ public class StatementControllerIntegrationTest {
 	@Test
 	public void thatStatementReturnsHeaderWithVersion() throws Exception {
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 			get("/xAPI/statements")
-				.header("Authorization", "Basic " + new String(encodedBytes))
+				.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 				.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
@@ -153,10 +153,10 @@ public class StatementControllerIntegrationTest {
 		
 		
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 			post("/xAPI/statements")
-				.header("Authorization", "Basic " + new String(encodedBytes))
+				.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 				.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(body))
@@ -178,10 +178,10 @@ public class StatementControllerIntegrationTest {
 
 
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 		post("/xAPI/statements")
-			.header("Authorization", "Basic " + new String(encodedBytes))
+			.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 			.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(body))
@@ -199,10 +199,10 @@ public class StatementControllerIntegrationTest {
             			"},\"description\":{\"en-US\":\"A fictitious example CBT course.\"}}},\"result\":{\"score\":{\"scaled\":0.95},\"success\":true,\"completion\":true}}";
 		
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 		post("/xAPI/statements")
-			.header("Authorization", "Basic " + new String(encodedBytes))
+			.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 			.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(body))
@@ -235,10 +235,10 @@ public class StatementControllerIntegrationTest {
             			"\"moreInfo\": \"http://virtualmeeting.example.com/345256\"},\"objectType\": \"Activity\"}}";
 		
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 		post("/xAPI/statements")
-			.header("Authorization", "Basic " + new String(encodedBytes))
+			.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 			.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(body))
@@ -259,10 +259,10 @@ public class StatementControllerIntegrationTest {
 
 
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 		post("/xAPI/statements")
-			.header("Authorization", "Basic " + new String(encodedBytes))
+			.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 			.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(body))
@@ -281,10 +281,10 @@ public class StatementControllerIntegrationTest {
 				"verb, or the Activity/object.\" }}}}";	
 
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 		post("/xAPI/statements")
-			.header("Authorization", "Basic " + new String(encodedBytes))
+			.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 			.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(body))
@@ -301,10 +301,10 @@ public class StatementControllerIntegrationTest {
 				"\"display\":{\"en-US\":\"created\" }}}";	
 
 		String basic = "test:test";
-		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes());
+		final byte[] encodedBytes = Base64.encodeBase64(basic.getBytes("UTF-8"));
 		this.mockMvc.perform(
 		post("/xAPI/statements")
-			.header("Authorization", "Basic " + new String(encodedBytes))
+			.header("Authorization", "Basic " + new String(encodedBytes, "UTF-8"))
 			.header(XApiConstants.XAPI_VERSION_HEADER, "someversion")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(body))

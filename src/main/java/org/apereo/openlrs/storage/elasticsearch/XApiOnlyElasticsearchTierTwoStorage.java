@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -167,9 +168,9 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 			for (OpenLRSEntity entity : entities) {
 				save(entity);
 			}
+			return new ArrayList<OpenLRSEntity>(entities);
 		}
-		
-		return new ArrayList<OpenLRSEntity>(entities);
+		return Collections.emptyList();		
 	}
 	
 	@Override
@@ -215,7 +216,7 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 		if (StringUtils.isNotBlank(actor)) {
 			ObjectMapper objectMapper = new ObjectMapper();
 			try {
-				xApiActor = objectMapper.readValue(actor.getBytes(), XApiActor.class);
+				xApiActor = objectMapper.readValue(actor.getBytes("UTF-8"), XApiActor.class);
 			} 
 			catch (Exception e) {
 				log.error(e.getMessage(),e);

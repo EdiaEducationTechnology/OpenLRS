@@ -97,7 +97,7 @@ public class EventConversionService {
 			else if (isEvent(entity)) {
 				Event event = (Event)entity;
 				try {
-					statement = objectMapper.readValue(event.getRaw().getBytes(), Statement.class);
+					statement = objectMapper.readValue(event.getRaw().getBytes("UTF-8"), Statement.class);
 				} 
 				catch (Exception e) {
 					log.error(e.getMessage(), e);

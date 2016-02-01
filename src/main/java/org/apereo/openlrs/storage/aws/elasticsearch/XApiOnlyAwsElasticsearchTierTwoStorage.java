@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -343,13 +344,13 @@ public class XApiOnlyAwsElasticsearchTierTwoStorage implements TierTwoStorage<Op
                 log.error(e.getMessage(),e);
                 e.printStackTrace();
             }
+            return new ArrayList<OpenLRSEntity>(entities);
         }
         
-        
-        return new ArrayList<OpenLRSEntity>(entities);
+        return Collections.emptyList();
     }
 
-    public ArrayList<StatementMetadata> saveAllMetaData(Collection<StatementMetadata> metaDataEntries) {
+    public List<StatementMetadata> saveAllMetaData(Collection<StatementMetadata> metaDataEntries) {
         if (metaDataEntries != null && !metaDataEntries.isEmpty()) {
             Builder builder = new Bulk.Builder().defaultIndex(METADATA_INDEX).defaultType(METADATA_TYPE);
             
@@ -364,9 +365,9 @@ public class XApiOnlyAwsElasticsearchTierTwoStorage implements TierTwoStorage<Op
                 log.error(e.getMessage(),e);
                 e.printStackTrace();
             }
+            return new ArrayList<StatementMetadata>(metaDataEntries);
         }
-        
-        return new ArrayList<StatementMetadata>(metaDataEntries);
+        return Collections.emptyList();
     }
 
     @Override

@@ -14,6 +14,7 @@
  *******************************************************************************/
 package org.apereo.openlrs.utils;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -69,7 +70,7 @@ public class OAuthUtils {
 	}
 	
 	public static String sign(String secret, Map<String, String> oauthParameters, String algorithm, String method,
-			String url) {
+			String url) throws IOException {
 		
 		StringBuilder signatureBase = new StringBuilder(OAuthUtils.percentEncode(method));
 		signatureBase.append("&");
@@ -93,7 +94,7 @@ public class OAuthUtils {
 		Mac mac = null;
 		try {
 			SecretKeySpec secretKeySpec = new SecretKeySpec(
-					(OAuthUtils.percentEncode(secret) + "&").getBytes(), algorithm);
+					(OAuthUtils.percentEncode(secret) + "&").getBytes("UTF-8"), algorithm);
 					
 			mac = Mac.getInstance(secretKeySpec.getAlgorithm());
 			mac.init(secretKeySpec);		
@@ -107,10 +108,10 @@ public class OAuthUtils {
 			log.debug("signatureBaseString: " + signatureBase.toString());
 		}
 		
-		byte[] bytes = mac.doFinal(signatureBase.toString().getBytes());
+		byte[] bytes = mac.doFinal(signatureBase.toString().getBytes("UTF-8"));
 		byte[] encodedMacBytes = Base64.encodeBase64(bytes);
 
-		return new String(encodedMacBytes);
+		return new String(encodedMacBytes, "UTF-8");
 	}
 	
 	public static final String mapToJava(String name) {
