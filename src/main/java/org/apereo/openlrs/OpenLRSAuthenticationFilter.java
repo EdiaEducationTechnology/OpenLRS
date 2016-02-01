@@ -103,6 +103,7 @@ public class OpenLRSAuthenticationFilter extends OncePerRequestFilter {
 				Map<String, String []> params = request.getParameterMap();
 				if (params != null && !params.isEmpty()) {
 					for (Entry<String, String[]> entry : params.entrySet()) {
+						String key = entry.getKey();
 						String [] values = entry.getValue();
 						String value = null;
 						if (values != null) {
