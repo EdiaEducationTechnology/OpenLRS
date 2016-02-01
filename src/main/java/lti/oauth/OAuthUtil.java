@@ -20,9 +20,12 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author ggilbert
@@ -84,10 +87,10 @@ public class OAuthUtil {
 		}
 		
 		if (parameters != null && !parameters.isEmpty()) {
-			for (String key : parameters.keySet()) {
+			for (Entry<String, String> entry : parameters.entrySet()) {
+				String key = entry.getKey();
 				if (key.startsWith("oauth_")) {
-					String value = parameters.get(key);
-					if (value == null) value = "";
+					String value = StringUtils.defaultString(entry.getValue());
 					if (header.length() > 0) header.append(",");
 					header.append(" ");
 					header.append(OAuthUtil.percentEncode(key)).append("=\"");

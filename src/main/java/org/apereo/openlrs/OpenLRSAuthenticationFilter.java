@@ -17,6 +17,7 @@ package org.apereo.openlrs;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
@@ -101,8 +102,8 @@ public class OpenLRSAuthenticationFilter extends OncePerRequestFilter {
 				TreeMap<String, String> normalizedParams = new TreeMap<String, String>(oauth_parameters);
 				Map<String, String []> params = request.getParameterMap();
 				if (params != null && !params.isEmpty()) {
-					for (String key : params.keySet()) {
-						String [] values = params.get(key);
+					for (Entry<String, String[]> entry : params.entrySet()) {
+						String [] values = entry.getValue();
 						String value = null;
 						if (values != null) {
 							value = values[0];

@@ -67,7 +67,7 @@ public class AwsElasticsearchConfig {
         }
         URL loadedResource = this.getClass().getClassLoader().getResource("statement.mapping");
         InputStream inputStream = loadedResource.openStream();
-        InputStreamReader statementFileReader = new InputStreamReader(inputStream);
+        InputStreamReader statementFileReader = new InputStreamReader(inputStream, "UTF-8");
         JSONParser jsonParser = new JSONParser();
         JSONObject statementJSONObject = (JSONObject) jsonParser.parse(statementFileReader);
         log.debug("statment {}",  statementJSONObject.toJSONString());
@@ -95,7 +95,7 @@ public class AwsElasticsearchConfig {
         }
         URL loadedResource = this.getClass().getClassLoader().getResource("metadata.mapping");
         InputStream inputStream = loadedResource.openStream();
-        InputStreamReader metadataFileReader = new InputStreamReader(inputStream);
+        InputStreamReader metadataFileReader = new InputStreamReader(inputStream, "UTF-8");
         JSONParser jsonParser = new JSONParser();
         JSONObject metadataJSONObject = (JSONObject) jsonParser.parse(metadataFileReader);
         PutMapping metadataMapping = new PutMapping.Builder(

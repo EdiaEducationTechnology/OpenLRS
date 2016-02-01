@@ -16,6 +16,7 @@ package lti;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -76,8 +77,8 @@ public class LaunchRequest extends LtiMessage {
     public LaunchRequest(Map<String, String []> paramMap) {
         Map<String,String> flattenedParams = new TreeMap<String, String>();
 
-        for (String key : paramMap.keySet()) {
-            String [] values = paramMap.get(key);
+        for (Entry<String, String[]> entry : paramMap.entrySet()) {
+            String [] values = entry.getValue();
             String value = null;
             if (values != null && values.length > 0) {
                 for (String v : values) {
@@ -90,7 +91,7 @@ public class LaunchRequest extends LtiMessage {
                     }
                 }
             }
-            flattenedParams.put(key, value);
+            flattenedParams.put(entry.getKey(), value);
         }
 
         init(flattenedParams);
@@ -183,23 +184,20 @@ public class LaunchRequest extends LtiMessage {
         SortedMap<String,String> sm = new TreeMap<String, String>();
 
         if (custom != null && !custom.isEmpty()) {
-            Set<String> keys = custom.keySet();
-            for (String key : keys) {
-                sm.put(key, custom.get(key));
+            for (Entry<String, String> entry : custom.entrySet()) {
+                sm.put(entry.getKey(), entry.getValue());
             }
         }
 
         if (ext != null && !ext.isEmpty()) {
-            Set<String> keys = ext.keySet();
-            for (String key : keys) {
-                sm.put(key, ext.get(key));
+            for (Entry<String, String> entry : ext.entrySet()) {
+                sm.put(entry.getKey(), entry.getValue());
             }
         }
 
         if (extra != null && !extra.isEmpty()) {
-            Set<String> keys = extra.keySet();
-            for (String key : keys) {
-                sm.put(key, extra.get(key));
+            for (Entry<String, String> entry : extra.entrySet()) {
+                sm.put(entry.getKey(), entry.getValue());
             }
         }
 
@@ -561,22 +559,23 @@ public class LaunchRequest extends LtiMessage {
             //and check
             SortedMap<String,String> currentSM = this.toSortedMap();
 
-            Set<String> keys = paramMap.keySet();
-            if (keys != null && !keys.isEmpty()) {
-                for (String key : keys) {
+            Set<Entry<String, String>> entries = paramMap.entrySet();
+            if (entries != null && !entries.isEmpty()) {
+                for (Entry<String, String> entry : entries) {
+                    String key = entry.getKey();
                     if (key != null && key.startsWith("custom_")) {
                         if (this.custom == null) {
                             this.custom = new HashMap<String, String>();
                         }
 
-                        this.custom.put(key, paramMap.get(key));
+                        this.custom.put(key, entry.getValue());
                     }
                     else if (key != null && key.startsWith("ext_")) {
                         if (this.ext == null) {
                             this.ext = new HashMap<String, String>();
                         }
 
-                        this.ext.put(key, paramMap.get(key));
+                        this.ext.put(key, entry.getValue());
                     }
                     else {
 
@@ -588,7 +587,7 @@ public class LaunchRequest extends LtiMessage {
                             if (this.extra == null) {
                                 this.extra = new HashMap<String, String>();
                             }
-                            this.extra.put(key, paramMap.get(key));
+                            this.extra.put(key, entry.getValue());
                         }
                     }
                 }
