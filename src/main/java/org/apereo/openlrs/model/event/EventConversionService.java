@@ -203,7 +203,7 @@ public class EventConversionService {
 		if (xApiActor != null) {
 			String mbox = xApiActor.getMbox();
 			if (StringUtils.isNotBlank(mbox)) {
-				actor = StringUtils.substringBetween(mbox, "mailto:", "@");
+				actor = StringUtils.trim(StringUtils.removeStart(mbox, "mailto:"));
 			}
 		}
 
