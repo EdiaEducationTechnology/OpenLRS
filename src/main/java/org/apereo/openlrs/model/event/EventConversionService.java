@@ -60,7 +60,7 @@ public class EventConversionService {
 	public Event toEvent(OpenLRSEntity entity) {
 		Event event = null;
 		if (isEvent(entity)) {
-			event = (Event)event;
+			event = (Event)entity;
 		}
 		else if (isXApi(entity)) {
 			Statement statement = (Statement)entity;
