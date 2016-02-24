@@ -17,9 +17,12 @@ package org.apereo.openlrs.model.event;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -166,11 +169,25 @@ public class EventConversionService {
 			event.setOrganization(null);
 			event.setRaw(xapi.toJSON());
 			event.setSourceId(xapi.getId());
-			event.setTimestamp(xapi.getTimestamp());
+			event.setTimestamp(parseDate(xapi, event));
 			event.setVerb(parseVerbXApi(xapi));
 		}
 		
 		return event;
+	}
+
+	protected Date parseDate(Statement xapi, Event event) {
+		Date rv = null;
+		if (StringUtils.isNoneEmpty(xapi.getTimestamp())) {
+			try {
+				rv = DatatypeConverter.parseDateTime(xapi.getTimestamp()).getTime();
+			} catch (IllegalArgumentException e) {
+				// Not a valid date
+				log.warn("Cannot parse date: " + xapi.getTimestamp() + ", will use current instead");
+				rv = new Date();
+			}
+		}
+		return rv;
 	}
 	
 	private String parseContextXApi(Statement xapi) {

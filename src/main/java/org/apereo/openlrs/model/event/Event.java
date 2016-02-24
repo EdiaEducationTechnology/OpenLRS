@@ -15,17 +15,23 @@
  */
 package org.apereo.openlrs.model.event;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.apereo.openlrs.model.OpenLRSEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
 
 /**
  * @author ggilbert
@@ -47,9 +53,9 @@ public class Event implements OpenLRSEntity {
 	private String objectType;
 	private String context;
 	private String organization;
-	private String timestamp;
+	private Date timestamp;
 	private EventFormatType eventFormatType;
-	private String raw;
+	private DBObject raw;
 	
 	public String getId() {
 		return id;
@@ -99,10 +105,10 @@ public class Event implements OpenLRSEntity {
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
-	public String getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 	public EventFormatType getEventFormatType() {
@@ -111,14 +117,16 @@ public class Event implements OpenLRSEntity {
 	public void setEventFormatType(EventFormatType eventFormatType) {
 		this.eventFormatType = eventFormatType;
 	}
+
 	public String getRaw() {
-		if (raw == null) {
-			this.raw = toJSON();
+		if (raw != null) {
+			return JSON.serialize(raw);
 		}
-		return raw;
+		return toJSON();
 	}
-	public void setRaw(String raw) {
-		this.raw = raw;
+	 
+	public void setRaw(String json) {
+		this.raw = toDBObject(json);
 	}
 	
     @JsonIgnore
@@ -134,6 +142,10 @@ public class Event implements OpenLRSEntity {
 		return rawJson;
     }
 
+	protected DBObject toDBObject(String json) {
+		return (DBObject) JSON.parse(json);
+	}
+    
     @Override
     public String toString() {
         return toJSON();        
