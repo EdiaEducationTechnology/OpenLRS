@@ -184,10 +184,14 @@ public class EventConversionService {
 			} catch (IllegalArgumentException e) {
 				// Not a valid date
 				log.warn("Cannot parse date: " + xapi.getTimestamp() + ", will use current instead");
-				rv = new Date();
+				rv = defaultDate();
 			}
 		}
 		return rv;
+	}
+
+	protected Date defaultDate() {
+		return new Date();
 	}
 	
 	private String parseContextXApi(Statement xapi) {
