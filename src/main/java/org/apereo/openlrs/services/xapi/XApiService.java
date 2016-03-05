@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apereo.openlrs.exceptions.xapi.StatementStateConflictException;
 import org.apereo.openlrs.model.OpenLRSEntity;
-import org.apereo.openlrs.model.event.Event;
 import org.apereo.openlrs.model.event.EventConversionService;
 import org.apereo.openlrs.model.xapi.Statement;
 import org.apereo.openlrs.model.xapi.StatementResult;
@@ -33,8 +32,6 @@ import org.apereo.openlrs.services.EventService;
 import org.apereo.openlrs.utils.TimestampUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

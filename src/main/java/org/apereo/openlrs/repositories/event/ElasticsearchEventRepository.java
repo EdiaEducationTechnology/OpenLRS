@@ -16,7 +16,6 @@
 package org.apereo.openlrs.repositories.event;
 
 import org.apereo.openlrs.model.event.Event;
-import org.apereo.openlrs.model.xapi.StatementMetadata;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
