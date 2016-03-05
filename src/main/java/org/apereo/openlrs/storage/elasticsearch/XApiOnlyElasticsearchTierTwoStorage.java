@@ -288,12 +288,8 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 		}
 		
 		if (searchQuery != null) {
-			if (log.isDebugEnabled()) 
-			{
-				if(searchQuery.getQuery() != null)
-				{
-					log.debug(String.format("Elasticsearch query %s", searchQuery.getQuery().toString()));
-				}
+			if (log.isDebugEnabled() && searchQuery.getQuery() != null) {
+				log.debug(String.format("Elasticsearch query %s", searchQuery.getQuery().toString()));
 			}
 			
 			Iterable<Statement> iterableStatements = esSpringDataRepository.search(searchQuery);

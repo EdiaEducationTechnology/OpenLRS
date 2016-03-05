@@ -45,10 +45,9 @@ public class XAPIHeaderFilter extends OncePerRequestFilter {
 		String allowedRequestHeaders = request.getHeader("Access-Control-Request-Headers");
 		String responseHeader = XApiConstants.XAPI_VERSION_HEADER;
 		
-		if (StringUtils.isNotBlank(allowedRequestHeaders)) {
-			if (StringUtils.contains(allowedRequestHeaders, XApiConstants.XAPI_VERSION_HEADER.toLowerCase())) {
-				responseHeader = responseHeader.toLowerCase();
-			}
+		if (StringUtils.isNotBlank(allowedRequestHeaders)
+				&& StringUtils.contains(allowedRequestHeaders, XApiConstants.XAPI_VERSION_HEADER.toLowerCase())) {
+			responseHeader = responseHeader.toLowerCase();
 		}
 		
 		response.addHeader(responseHeader, version);

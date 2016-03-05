@@ -63,15 +63,13 @@ public class OAuthUtil {
 		Map<String, String> oauthParameters = new HashMap<String, String>();
 		if (authorization != null) {
 			Matcher m = AUTHORIZATION.matcher(authorization);
-			if (m.matches()) {
-				if (AUTH_SCHEME.equalsIgnoreCase(m.group(1))) {
-					for (String keyValuePair : m.group(2).split("\\s*,\\s*")) {
-						m = KEYVALUEPAIR.matcher(keyValuePair);
-						if (m.matches()) {
-							String key = OAuthUtil.decodePercent(m.group(1));
-							String value = OAuthUtil.decodePercent(m.group(2));
-							oauthParameters.put(key, value);
-						}
+			if (m.matches() && AUTH_SCHEME.equalsIgnoreCase(m.group(1))) {
+				for (String keyValuePair : m.group(2).split("\\s*,\\s*")) {
+					m = KEYVALUEPAIR.matcher(keyValuePair);
+					if (m.matches()) {
+						String key = OAuthUtil.decodePercent(m.group(1));
+						String value = OAuthUtil.decodePercent(m.group(2));
+						oauthParameters.put(key, value);
 					}
 				}
 			}
