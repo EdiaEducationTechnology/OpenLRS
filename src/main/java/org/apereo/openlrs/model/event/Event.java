@@ -40,7 +40,7 @@ import com.mongodb.util.JSON;
 public class Event implements OpenLRSEntity {
 
 	private static final long serialVersionUID = 1L;
-	@Transient private Logger log = Logger.getLogger(Event.class);
+	@Transient private static final Logger log = Logger.getLogger(Event.class);
 	@JsonIgnore public static final String OBJECT_KEY = "NORMALIZED";
 	
 	@Id private String id;
@@ -104,10 +104,10 @@ public class Event implements OpenLRSEntity {
 		this.organization = organization;
 	}
 	public Date getTimestamp() {
-		return timestamp;
+		return wrap(timestamp);
 	}
 	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+		this.timestamp = wrap(timestamp);
 	}
 	public EventFormatType getEventFormatType() {
 		return eventFormatType;
@@ -182,5 +182,9 @@ public class Event implements OpenLRSEntity {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	private Date wrap(Date t) {
+		return t != null ? new Date(t.getTime()) : null;
 	}
 }

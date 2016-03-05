@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CaliperEvent implements OpenLRSEntity {
 	
 	private static final long serialVersionUID = 1L;
-	private Logger log = Logger.getLogger(CaliperEvent.class);
+	private static final Logger log = Logger.getLogger(CaliperEvent.class);
 	@JsonIgnore public static final String OBJECT_KEY = "CALIPEREVENT";
 
 

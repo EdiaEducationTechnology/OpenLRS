@@ -1,7 +1,5 @@
 package org.apereo.openlrs.storage.aws.elasticsearch;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,13 +17,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.util.ResourceUtils;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
-import io.searchbox.client.JestResult;
 import io.searchbox.client.config.HttpClientConfig;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.mapping.PutMapping;
@@ -78,7 +72,7 @@ public class AwsElasticsearchConfig {
         ).build();
 
         try {
-            JestResult result = jestClient().execute(statmentMapping);
+            jestClient().execute(statmentMapping);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
             e.printStackTrace();
@@ -105,7 +99,7 @@ public class AwsElasticsearchConfig {
         ).build();
 
         try {
-            JestResult result = jestClient().execute(metadataMapping);
+            jestClient().execute(metadataMapping);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
             e.printStackTrace();
