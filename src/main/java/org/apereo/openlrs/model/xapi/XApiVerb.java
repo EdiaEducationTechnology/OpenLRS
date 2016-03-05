@@ -1,5 +1,6 @@
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
@@ -17,9 +18,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author Robert E. Long (rlong @ unicon.net)
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiVerb {
+public class XApiVerb implements Serializable {
 
     /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 1;
+
+	/**
      * Corresponds to a Verb definition. Each Verb definition corresponds to the meaning of a Verb, not the word. 
      * The IRI should be human-readable and contain the Verb meaning.
      */

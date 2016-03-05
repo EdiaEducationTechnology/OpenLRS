@@ -15,6 +15,7 @@
  */
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,8 +26,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiContextActivities {
-	
+public class XApiContextActivities implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
+
 	private List<XApiObject> parent;
 	private List<XApiObject> grouping;
 	private List<XApiObject> category;

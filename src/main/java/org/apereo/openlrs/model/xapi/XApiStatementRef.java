@@ -15,6 +15,8 @@
  */
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,7 +27,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiStatementRef {
+public class XApiStatementRef implements Serializable {
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 1;
+
 	@NotNull private XApiObjectTypes objectType = XApiObjectTypes.StatementRef;
 	@NotNull private String id;
 	/**

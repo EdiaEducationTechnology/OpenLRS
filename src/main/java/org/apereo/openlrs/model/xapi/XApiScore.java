@@ -15,6 +15,8 @@
  */
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -23,7 +25,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiScore {
+public class XApiScore implements Serializable {
+	
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
+
 	private Double scaled;
 	private Double raw;
 	private Double min;

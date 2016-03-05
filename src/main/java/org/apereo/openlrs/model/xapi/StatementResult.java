@@ -15,13 +15,20 @@
  */
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author ggilbert
  *
  */
-public class StatementResult {
+public class StatementResult implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
+
 	
 	private List<Statement> statements;
 	

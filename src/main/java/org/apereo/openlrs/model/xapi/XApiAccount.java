@@ -15,6 +15,8 @@
  */
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
+
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -27,7 +29,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiAccount {
+public class XApiAccount implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
+
 	@Field(type=FieldType.String,index=FieldIndex.not_analyzed) private String homePage;
 	@Field(type=FieldType.String,index=FieldIndex.not_analyzed) private String name;
 	

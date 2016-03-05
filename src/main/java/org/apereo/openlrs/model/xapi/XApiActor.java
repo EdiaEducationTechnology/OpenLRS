@@ -1,5 +1,6 @@
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -16,7 +17,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author Robert E. Long (rlong @ unicon.net)
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiActor {
+public class XApiActor implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
 
     private XApiActorTypes objectType;
     

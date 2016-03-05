@@ -1,5 +1,7 @@
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -15,7 +17,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author Robert E. Long (rlong @ unicon.net)
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiObject {
+public class XApiObject implements Serializable {
+	
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
 
 	@Field(type=FieldType.String,index=FieldIndex.not_analyzed) 
     @NotNull private String id;

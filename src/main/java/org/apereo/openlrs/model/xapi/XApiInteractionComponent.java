@@ -15,6 +15,7 @@
  */
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
@@ -27,7 +28,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class XApiInteractionComponent {
+public class XApiInteractionComponent implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
+
 	@NotNull private String id;
 	private Map<String, String> description;
 	

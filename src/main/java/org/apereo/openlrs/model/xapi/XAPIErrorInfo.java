@@ -15,6 +15,7 @@
  */
 package org.apereo.openlrs.model.xapi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Class used to hold info for a XAPI-call-related error.  This object will be JSONified and returned as the XAPI call response.
  * @author Gary Roybal, groybal@unicon.net
  */
-public class XAPIErrorInfo {
+public class XAPIErrorInfo implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1;
 
     @JsonProperty private int status;
     @JsonProperty private String reason;
