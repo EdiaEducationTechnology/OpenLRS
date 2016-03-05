@@ -204,11 +204,11 @@ public class EventConversionService {
 				List<XApiObject> parentContext = xApiContextActivities.getParent();
 				if (parentContext != null && !parentContext.isEmpty()) {
 					for (XApiObject object : parentContext) {
-						String id = object.getId();
-						if (StringUtils.contains(id, "portal/site/")) {
-							context = StringUtils.substringAfterLast(id, "/");
-							break;
+						context = object.getId();
+						if (StringUtils.contains(context, "portal/site/")) {
+							context = StringUtils.substringAfterLast(context, "/");
 						}
+						break;
 					}
 				}
 			}
