@@ -56,6 +56,8 @@ public class OAuthFilter extends OncePerRequestFilter {
 		
 		LaunchRequest launchRequest = new LaunchRequest(req.getParameterMap());
 		SortedMap<String, String> alphaSortedMap = launchRequest.toSortedMap();
+		// Override the request oauth_consumer_key with what we expect it to be.
+		alphaSortedMap.put("oauth_consumer_key", key);
 		String signature = alphaSortedMap.remove(OAuthUtil.SIGNATURE_PARAM);
 
 		String calculatedSignature = null;
