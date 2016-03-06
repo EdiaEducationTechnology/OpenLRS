@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("NoOpTierTwoStorage")
 public class NoOpTierTwoStorage implements TierTwoStorage<OpenLRSEntity> {
-	private Logger log = Logger.getLogger(NoOpTierTwoStorage.class);
+	private static final Logger log = Logger.getLogger(NoOpTierTwoStorage.class);
 
 	/* (non-Javadoc)
 	 * @see org.apereo.openlrs.storage.TierTwoStorage#findById(java.lang.String)

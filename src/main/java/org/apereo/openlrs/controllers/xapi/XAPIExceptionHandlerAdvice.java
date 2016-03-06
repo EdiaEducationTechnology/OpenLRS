@@ -51,7 +51,7 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 @ControllerAdvice(annotations = RestController.class)
 public class XAPIExceptionHandlerAdvice {
 
-    private Logger logger = LoggerFactory.getLogger(XAPIExceptionHandlerAdvice.class);
+    private static final Logger logger = LoggerFactory.getLogger(XAPIExceptionHandlerAdvice.class);
 
     public XAPIExceptionHandlerAdvice() {
     }
@@ -148,7 +148,7 @@ public class XAPIExceptionHandlerAdvice {
         }
     }
     
-    @ExceptionHandler(org.springframework.web.util.NestedServletException.class)
+    @ExceptionHandler(NestedServletException.class)
     public void test(NestedServletException e) {
     	Throwable t = e.getCause();
     	logger.debug("*************************** "+t.getClass().getName());

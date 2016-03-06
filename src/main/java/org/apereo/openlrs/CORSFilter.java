@@ -33,7 +33,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class CORSFilter extends OncePerRequestFilter {
 	
-	private Logger log = Logger.getLogger(CORSFilter.class);
+	private static final Logger log = Logger.getLogger(CORSFilter.class);
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,

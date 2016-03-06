@@ -36,7 +36,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.collections.IteratorUtils;
+import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apereo.openlrs.model.OpenLRSEntity;
 import org.apereo.openlrs.model.xapi.Statement;
@@ -80,7 +80,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Profile("elasticsearch")
 public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenLRSEntity> {
 	
-	private Logger log = LoggerFactory.getLogger(XApiOnlyElasticsearchTierTwoStorage.class);
+	private static final Logger log = LoggerFactory.getLogger(XApiOnlyElasticsearchTierTwoStorage.class);
 	
 	@Value("${es.bulkIndexSize:100}")
 	private int bulkIndexSize;
@@ -90,7 +90,6 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 	
 	@Autowired private ElasticSearchStatementSpringDataRepository esSpringDataRepository;
 	@Autowired private ElasticSearchStatementMetadataSDRepository esStatementMetadataRepository;
-	@Autowired private ObjectMapper objectMapper;
 	
 	private ScheduledExecutorService executorService = null;
 	private LinkedBlockingQueue<Statement> statementQueue = new LinkedBlockingQueue<Statement>();
@@ -177,7 +176,7 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 	public List<OpenLRSEntity> findAll() {
 		Iterable<Statement> iterableStatements = esSpringDataRepository.findAll();
 		if (iterableStatements != null) {
-			return IteratorUtils.toList(iterableStatements.iterator());
+			return IteratorUtils.<OpenLRSEntity>toList(iterableStatements.iterator());
 		}
 		return null;
 	}
@@ -197,7 +196,7 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 	public Page<OpenLRSEntity> findAll(Pageable pageable) {
 		Iterable<Statement> iterableStatements = esSpringDataRepository.findAll();
 		if (iterableStatements != null) {
-			return new PageImpl<OpenLRSEntity>(IteratorUtils.toList(iterableStatements.iterator()));
+			return new PageImpl<OpenLRSEntity>(IteratorUtils.<OpenLRSEntity>toList(iterableStatements.iterator()));
 		}
 		return null;
 	}
@@ -209,7 +208,7 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 		String activity = filters.get(StatementUtils.ACTIVITY_FILTER);
 		String since = filters.get(StatementUtils.SINCE_FILTER);
 		String until = filters.get(StatementUtils.UNTIL_FILTER);
-		int limit = getLimit(filters.get(StatementUtils.LIMIT_FILTER));;
+		int limit = getLimit(filters.get(StatementUtils.LIMIT_FILTER));
 		
 		XApiActor xApiActor = null;
 		
@@ -294,7 +293,7 @@ public class XApiOnlyElasticsearchTierTwoStorage implements TierTwoStorage<OpenL
 			
 			Iterable<Statement> iterableStatements = esSpringDataRepository.search(searchQuery);
 			if (iterableStatements != null) {
-				return new PageImpl<OpenLRSEntity>(IteratorUtils.toList(iterableStatements.iterator()));
+				return new PageImpl<OpenLRSEntity>(IteratorUtils.<OpenLRSEntity>toList(iterableStatements.iterator()));
 			}
 		}
 		return null;

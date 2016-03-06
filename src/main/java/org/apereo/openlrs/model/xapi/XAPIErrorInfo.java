@@ -90,4 +90,32 @@ public class XAPIErrorInfo implements Serializable {
         this.parameters = request.getParameterMap();
     }
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public Map<String, String[]> getParameters() {
+		return parameters;
+	}
+
+	public List<String> getMessages() {
+		return messages;
+	}
+
 }

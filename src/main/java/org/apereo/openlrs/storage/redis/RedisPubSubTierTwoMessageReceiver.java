@@ -37,7 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Profile("redis")
 public class RedisPubSubTierTwoMessageReceiver {
 	
-	private Logger log = LoggerFactory.getLogger(RedisPubSubTierTwoMessageReceiver.class);
+	private static final Logger log = LoggerFactory.getLogger(RedisPubSubTierTwoMessageReceiver.class);
 	@Autowired private ObjectMapper objectMapper;
 	@Autowired private StorageFactory storageFactory;
 

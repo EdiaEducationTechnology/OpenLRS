@@ -41,7 +41,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class OpenLRSAuthenticationFilter extends OncePerRequestFilter {
 	
-	private Logger log = Logger.getLogger(OpenLRSAuthenticationFilter.class);
+	private static final Logger log = Logger.getLogger(OpenLRSAuthenticationFilter.class);
 	
 	@Value("${auth.enabled}")
 	private boolean enabled;

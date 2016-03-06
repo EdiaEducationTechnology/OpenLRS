@@ -49,7 +49,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Service
 public class EventConversionService {
-	private Logger log = Logger.getLogger(EventConversionService.class);
+	private static final Logger log = Logger.getLogger(EventConversionService.class);
 	@Autowired private ObjectMapper objectMapper;
 	
 	public boolean isEvent(OpenLRSEntity entity) {
@@ -195,22 +195,24 @@ public class EventConversionService {
 	}
 	
 	private String parseContextXApi(Statement xapi) {
-		String context = null;
-		
 		XApiContext xApiContext = xapi.getContext();
 		if (xApiContext != null) {
 			XApiContextActivities xApiContextActivities = xApiContext.getContextActivities();
 			if (xApiContextActivities != null) {
-				List<XApiObject> parentContext = xApiContextActivities.getParent();
-				if (parentContext != null && !parentContext.isEmpty()) {
-					for (XApiObject object : parentContext) {
-						context = extractContext(object);
-						break;
-					}
-				}
+				return parseContextActivities(xApiContextActivities);
 			}
 		}
+		return null;
+	}
 
+	protected String parseContextActivities(XApiContextActivities xApiContextActivities) {
+		String context = null;
+		List<XApiObject> parentContext = xApiContextActivities.getParent();
+		if (parentContext != null && !parentContext.isEmpty()) {
+			for (XApiObject object : parentContext) {
+				context = extractContext(object);
+			}
+		}
 		return context;
 	}
 

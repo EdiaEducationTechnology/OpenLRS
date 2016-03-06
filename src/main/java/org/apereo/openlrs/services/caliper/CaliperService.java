@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 @Profile({"redis","mongo"})
 public class CaliperService extends EventService {
 
-	private Logger log = Logger.getLogger(CaliperService.class);
+	private static final Logger log = Logger.getLogger(CaliperService.class);
 	
 	public void post(String organizationId, CaliperEvent caliperEvent) {
     	if (log.isDebugEnabled()) {

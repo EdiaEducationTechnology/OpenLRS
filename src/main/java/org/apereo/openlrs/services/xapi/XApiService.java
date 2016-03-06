@@ -41,7 +41,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class XApiService extends EventService {
-	private Logger log = Logger.getLogger(XApiService.class);
+	private static final Logger log = Logger.getLogger(XApiService.class);
 	
 	@Autowired private EventConversionService eventConversionService;
 	

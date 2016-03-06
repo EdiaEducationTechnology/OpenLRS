@@ -76,7 +76,7 @@ import io.searchbox.params.Parameters;
 @Profile("awselasticsearch")
 public class XApiOnlyAwsElasticsearchTierTwoStorage implements TierTwoStorage<OpenLRSEntity> {
     
-    private Logger log = LoggerFactory.getLogger(XApiOnlyAwsElasticsearchTierTwoStorage.class);
+    private static final Logger log = LoggerFactory.getLogger(XApiOnlyAwsElasticsearchTierTwoStorage.class);
 
     @Value("${es.bulkIndexSize:100}")
     private int bulkIndexSize;

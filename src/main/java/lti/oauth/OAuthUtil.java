@@ -104,7 +104,7 @@ public class OAuthUtil {
     	try {
     		return URLDecoder.decode(s, ENCODING);
     		// This implements http://oauth.pbwiki.com/FlexibleDecoding
-    	} catch (java.io.UnsupportedEncodingException wow) {
+    	} catch (UnsupportedEncodingException wow) {
     		throw new RuntimeException(wow.getMessage(), wow);
     	}
     }

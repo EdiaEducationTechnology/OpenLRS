@@ -41,7 +41,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class OAuthFilter extends OncePerRequestFilter {
 	
-	private Logger log = Logger.getLogger(OAuthFilter.class);
+	private static final Logger log = Logger.getLogger(OAuthFilter.class);
 	
 	@Value("${auth.oauth.key}")
 	private String key;
@@ -58,7 +58,7 @@ public class OAuthFilter extends OncePerRequestFilter {
 		SortedMap<String, String> alphaSortedMap = launchRequest.toSortedMap();
 		String signature = alphaSortedMap.remove(OAuthUtil.SIGNATURE_PARAM);
 
-        String calculatedSignature = null;
+		String calculatedSignature = null;
 		try {
 			calculatedSignature = new OAuthMessageSigner().sign(secret,
 											OAuthUtil.mapToJava(alphaSortedMap.get(OAuthUtil.SIGNATURE_METHOD_PARAM)),
@@ -70,29 +70,29 @@ public class OAuthFilter extends OncePerRequestFilter {
 			return;
 		}
 
-        if (!signature.equals(calculatedSignature)) {
-        	// try again with http
-	        String recalculatedSignature = null;
-	        
-	        if (StringUtils.startsWithIgnoreCase(req.getRequestURL().toString(), "https:")) {
-	        	String url = StringUtils.replaceOnce(req.getRequestURL().toString(), "https:", "http:");
+		if (!signature.equals(calculatedSignature)) {
+			// try again with http
+			String recalculatedSignature = null;
+
+			if (StringUtils.startsWithIgnoreCase(req.getRequestURL().toString(), "https:")) {
+				String url = StringUtils.replaceOnce(req.getRequestURL().toString(), "https:", "http:");
 				try {
 					recalculatedSignature = new OAuthMessageSigner().sign(secret,
 							OAuthUtil.mapToJava(alphaSortedMap.get(OAuthUtil.SIGNATURE_METHOD_PARAM)),
-							"POST",	url, alphaSortedMap);
+							"POST", url, alphaSortedMap);
 				} 
 				catch (Exception e) {
-					log.error(e.getMessage(),e);
+					log.error(e.getMessage(), e);
 					res.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
 					return;
 				}
-	        }
-	        
-	        if (!signature.equals(recalculatedSignature)) {
-	        	res.sendError(HttpStatus.UNAUTHORIZED.value());
-	        	return;
-	        }
-        }
+			}
+
+			if (!signature.equals(recalculatedSignature)) {
+				res.sendError(HttpStatus.UNAUTHORIZED.value());
+				return;
+			}
+		}
 
 		fc.doFilter(req, res);
 	}

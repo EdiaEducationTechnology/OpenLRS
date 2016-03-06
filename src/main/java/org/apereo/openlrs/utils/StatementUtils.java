@@ -19,8 +19,12 @@ import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 public class StatementUtils {
+	
+	private static final Logger log = Logger.getLogger(StatementUtils.class);
+
 	
 	public static final String ACTOR_FILTER = "actor";
 	public static final String ACTIVITY_FILTER = "activity";
@@ -131,7 +135,7 @@ public class StatementUtils {
     			  filterMap.put(LIMIT_FILTER, limit);
     		  }
     		} catch (NumberFormatException e) {
-    		  
+    			log.warn("Cannot parse limit as number, the value is: " + limit);
     		}
         }
 

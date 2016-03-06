@@ -37,7 +37,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("InMemoryStorage")
 public class InMemoryStorage implements TierOneStorage<OpenLRSEntity>, TierTwoStorage<OpenLRSEntity> {
-	private Logger log = Logger.getLogger(InMemoryStorage.class);
+	private static final Logger log = Logger.getLogger(InMemoryStorage.class);
 	private static Map<String, OpenLRSEntity> store = new HashMap<String, OpenLRSEntity>();
 
 	@Override

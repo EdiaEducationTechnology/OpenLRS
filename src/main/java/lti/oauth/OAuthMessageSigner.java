@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
  */
 public class OAuthMessageSigner {
 	
-	private Logger log = Logger.getLogger(OAuthMessageSigner.class);
+	private static final Logger log = Logger.getLogger(OAuthMessageSigner.class);
 
 	/**
 	 * This method double encodes the parameter keys and values.
@@ -52,7 +52,7 @@ public class OAuthMessageSigner {
 	 */
 	public String sign(String secret, String algorithm, String method, 
 				String url, SortedMap<String, String> parameters) throws Exception {
-		SecretKeySpec secretKeySpec = new SecretKeySpec((secret.concat(OAuthUtil.AMPERSAND)).getBytes("UTF-8"),algorithm);
+		SecretKeySpec secretKeySpec = new SecretKeySpec(secret.concat(OAuthUtil.AMPERSAND).getBytes("UTF-8"),algorithm);
         Mac mac = Mac.getInstance(secretKeySpec.getAlgorithm());
         mac.init(secretKeySpec);
         

@@ -32,7 +32,7 @@ import io.searchbox.indices.mapping.PutMapping;
 @Configuration
 @Profile("awselasticsearch")
 public class AwsElasticsearchConfig {
-    private Logger log = LoggerFactory.getLogger(AwsElasticsearchConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(AwsElasticsearchConfig.class);
     @Value("${aws.es.connectionUrl}")
     private String connectionUrl;
     @Bean

@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class OAuthUtils {
-	private static Logger log = Logger.getLogger(OAuthUtils.class);
+	private static final Logger log = Logger.getLogger(OAuthUtils.class);
 	
 	private static final Pattern AUTHORIZATION_PATTERN = Pattern.compile("\\s*(\\w*)\\s+(.*)");
 	private static final Pattern KEYVALUEPAIR_PATTERN = Pattern.compile("(\\S*)\\s*\\=\\s*\"([^\"]*)\"");
@@ -137,7 +137,7 @@ public class OAuthUtils {
     	try {
     		return URLDecoder.decode(s, "UTF-8");
     	} 
-    	catch (java.io.UnsupportedEncodingException e) {
+    	catch (UnsupportedEncodingException e) {
     		throw new RuntimeException(e.getMessage(), e);
     	}
     }
