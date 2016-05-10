@@ -108,17 +108,17 @@ public class XApiService extends EventService {
     public Page<Statement> getByContext(String context, Pageable pageable) {
     	Page<OpenLRSEntity> page = getTierTwoStorage().findByContext(context,pageable);
     	
-    	return eventConversionService.toXApiPage(page);
+    	return eventConversionService.toXApiPage(page, pageable);
     }
     
     public Page<Statement> getByUser(String user, Pageable pageable) {
     	Page<OpenLRSEntity> page = getTierTwoStorage().findByUser(user,pageable);
-    	return eventConversionService.toXApiPage(page);
+    	return eventConversionService.toXApiPage(page, pageable);
     }
     
     public Page<Statement> getByContextAndUser(String context,String user, Pageable pageable) {
     	Page<OpenLRSEntity> page = getTierTwoStorage().findByContextAndUser(context,user,pageable);
-    	return eventConversionService.toXApiPage(page);
+    	return eventConversionService.toXApiPage(page, pageable);
     }
 
 }

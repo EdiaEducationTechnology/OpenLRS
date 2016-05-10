@@ -34,16 +34,16 @@ public class NormalizedEventService extends EventService {
 
     public Page<Event> getByContext(String context, Pageable pageable) {
     	Page<OpenLRSEntity> page = getTierTwoStorage().findByContext(context,pageable);   	
-    	return eventConversionService.toEventPage(page);
+    	return eventConversionService.toEventPage(page, pageable);
     }
     
     public Page<Event> getByUser(String user, Pageable pageable) {
     	Page<OpenLRSEntity> page = getTierTwoStorage().findByUser(user,pageable);
-    	return eventConversionService.toEventPage(page);
+    	return eventConversionService.toEventPage(page, pageable);
     }
     
     public Page<Event> getByContextAndUser(String context,String user, Pageable pageable) {
     	Page<OpenLRSEntity> page = getTierTwoStorage().findByContextAndUser(context,user,pageable);
-    	return eventConversionService.toEventPage(page);
+    	return eventConversionService.toEventPage(page, pageable);
     }
 }

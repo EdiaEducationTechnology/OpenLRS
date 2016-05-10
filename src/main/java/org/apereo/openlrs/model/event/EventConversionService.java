@@ -39,6 +39,7 @@ import org.apereo.openlrs.model.xapi.XApiVerb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,7 +77,7 @@ public class EventConversionService {
 		return event;
 	}
 	
-	public Page<Event> toEventPage(Page<OpenLRSEntity> page) {
+	public Page<Event> toEventPage(Page<OpenLRSEntity> page, Pageable pageable) {
 		Page<Event> events = null;
     	if (page != null && page.getContent() != null && !page.getContent().isEmpty()) {
     		List<OpenLRSEntity> entities = page.getContent();
@@ -85,7 +86,7 @@ public class EventConversionService {
     			eventList.add(toEvent(entity));
     		}
     		
-    		events = new PageImpl<Event>(eventList);
+    		events = new PageImpl<Event>(eventList, pageable, page.getTotalElements());
     	}
     	
     	return events;
@@ -115,7 +116,7 @@ public class EventConversionService {
 		return statement;
 	}
 	
-	public Page<Statement> toXApiPage(Page<OpenLRSEntity> page) {
+	public Page<Statement> toXApiPage(Page<OpenLRSEntity> page, Pageable pageable) {
 		Page<Statement> statements = null;
     	if (page != null && page.getContent() != null && !page.getContent().isEmpty()) {
     		List<OpenLRSEntity> entities = page.getContent();
@@ -124,7 +125,7 @@ public class EventConversionService {
     			statementList.add(toXApi(entity));
     		}
     		
-    		statements = new PageImpl<Statement>(statementList);
+    		statements = new PageImpl<Statement>(statementList, pageable, page.getTotalElements());
     	}
     	
     	return statements;
